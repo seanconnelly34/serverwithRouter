@@ -6,7 +6,7 @@ const fs = require("fs");
 const PDFDocument = require("pdfkit");
 const transporter = require("../config");
 const Timestamp = require("../utils/Timestamp");
-
+f
 router.post("/registration", (req, res) => {
   const secondsId = Timestamp();
   const doc = new PDFDocument({ margin: 20, compress: false });
