@@ -5,6 +5,7 @@ import axios from "axios";
 import State from "./state.js";
 import Risk from "./components/Risk";
 import Paragraph from "./components/Paragrapgh";
+import Para2 from "./components/Para2";
 import Section1 from "./components/Section1";
 import Section2 from "./components/Section2";
 import Section3 from "./components/Section3";
@@ -103,6 +104,8 @@ const Covid = (props) => {
     }
   };
 
+  console.log("statessssaaf", state)
+
   return (
     <Container>
       {done ? (
@@ -137,16 +140,17 @@ const Covid = (props) => {
                 onCheck={onCheck}
                 state={state}
               />
-              <Section2
+              {/* <Section2
                 onInputChange={onInputChange}
                 state={state}
                 firstSubmit={firstSubmit}
-              />
-              <Section3
+              /> */}
+              {/* <Section3
                 onInputChange={onInputChange}
                 state={state}
                 firstSubmit={firstSubmit}
-              />
+              /> */}
+              <Para2/>
 
               <Grid item xs={12}>
                 <h3>

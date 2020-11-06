@@ -10,7 +10,7 @@ const Physicians = (props) => {
         <h1>PHYSICIANS:</h1>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <h3>Dr. Richarch Bendor-Samuel, MD, FRCS(C)</h3>
+        <h3>Dr. Richard Bendor-Samuel, MD, FRCS(C)</h3>
       </Grid>
       <Grid item xs={12} sm={6}>
         <h3>Dr. Louis O. Boileau, BSc, MD, FRCS(C)</h3>

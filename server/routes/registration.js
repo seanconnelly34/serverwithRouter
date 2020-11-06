@@ -230,15 +230,15 @@ router.post("/registration", (req, res) => {
   doc.text(req.body.openingmouthDate, 195, 550);
 
   doc.text("Sleep Apnea:", 50, 570);
-  doc.text(`${req.body.sleepApnea ? "Yes" : "No"}`, 175, 570);
+  doc.text(`${req.body.sleepApnea}`, 175, 570);
   doc.text(`Other: ${req.body.sleepApneaOther}`, 195, 570);
 
   doc.text("Smoker:", 50, 590);
-  doc.text(`${req.body.doSmoke ? "Yes" : "No"}`, 175, 590);
+  doc.text(`${req.body.doSmoke}`, 175, 590);
   doc.text(`# per day: ${req.body.smokeNumn}`, 205, 590);
 
   doc.text("Quit smoking:", 50, 610);
-  doc.text(`${req.body.didSmoke ? "Yes" : "No"}`, 175, 610);
+  doc.text(`${req.body.didSmoke}`, 175, 610);
   doc.text(req.body.smokeQuit, 205, 610);
 
   doc.text("Height:", 50, 630);

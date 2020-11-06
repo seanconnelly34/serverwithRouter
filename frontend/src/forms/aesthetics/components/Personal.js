@@ -31,9 +31,10 @@ const PersonalInfo = (props) => {
         <TextValidator
           fullWidth
           label="Name"
-          onChange={(e) => setName(e)}
+          // onChange={(e) => setName(e)}
+          onChange={props.onInputChange}
           name="name"
-          value={name}
+          value={props.state.name}
           validators={["minStringLength:2", "maxStringLength:25"]}
           errorMessages={["This field is required", "Name is not valid"]}
           inputProps={{ style: { fontSize: fontSize } }}
@@ -62,9 +63,10 @@ const PersonalInfo = (props) => {
         <TextValidator
           fullWidth
           label="Street Address"
-          onChange={(e) => setAddress(e)}
+          // onChange={(e) => setAddress(e)}
+          onChange={props.onInputChange}
           name="streetaddress"
-          value={address}
+          value={props.state.streetaddress}
           validators={["minStringLength:5", "maxStringLength:30"]}
           errorMessages={["Enter your address", "Too long"]}
           inputProps={{ style: { fontSize: fontSize } }}

@@ -74,10 +74,10 @@ const Consent = (props) => {
   const sendEmail = (event) => {
     event.preventDefault();
 
-    if (name.length > 2 && name.length < 40) {
+    if (state.name.length > 2 && state.name.length < 40) {
       setDone(true);
       axios
-        .post("/consent", { ...state, name, trimmedSignature })
+        .post("/consent", { ...state, trimmedSignature })
         .then((response) => {
           setResult(response.data);
           setState(State);

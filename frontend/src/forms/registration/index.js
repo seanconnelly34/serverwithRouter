@@ -130,6 +130,8 @@ const Registration = (props) => {
     setState((prevState) => ({ ...prevState, [name]: !prevState[name] }));
   };
 
+  console.log('STATEFORSMOKE', state );
+
   return (
     <>
       <Container>

@@ -28,9 +28,10 @@ const Risk = (props) => {
         <TextValidator
           fullWidth
           label="Patient Full Name"
-          onChange={(e) => setName(e)}
+          // onChange={(e) => setName(e)}
+          onChange={props.onInputChange}
           name="name"
-          value={name}
+          value={props.state.name}
           validators={["minStringLength:4", "maxStringLength:40"]}
           errorMessages={["This field is required", "Date is not valid"]}
           inputProps={{ style: { fontSize: fontSize } }}

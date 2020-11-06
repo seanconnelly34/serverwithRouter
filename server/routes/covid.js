@@ -7,6 +7,35 @@ const PDFDocument = require("pdfkit");
 const transporter = require("../config");
 const Timestamp = require("../utils/Timestamp");
 
+
+const NewDate = () => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  var dateObj = new Date();
+  var month = monthNames[dateObj.getMonth()];
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+
+  const newdate = month + " " + day + ", " + year;
+
+  return newdate;
+};
+
+
+
 router.post("/covid", (req, res) => {
   const secondsId = Timestamp();
   const doc = new PDFDocument({ margin: 20, compress: false });
@@ -18,113 +47,35 @@ router.post("/covid", (req, res) => {
   // Set some meta data
   doc.info["Title"] = "Covid Assessment Form";
   doc.info["Author"] = "Landings Surgical Center";
-  doc.fontSize(17);
-  doc.text("Covid Assessment Form", {
-    underline: true,
-    align: "center",
-  });
 
+  doc.image(__dirname + "/covid-risk-1.jpg", 10, 10, { width: 600 });
   doc.fontSize(11);
-  //----------------------------------------- LEFT SIDE START
-  //DATE
-  doc.font("Times-Bold");
-  doc.text("Date:", 50, 90, {
-    underline: true,
-  });
   doc.font("Times-Roman");
-  doc.text(req.body.date, 145, 90);
-  //END DATE
-  // NAME
-  doc.font("Times-Bold");
-  doc.text("Name:", 50, 110, {
-    underline: true,
-  });
-  doc.font("Times-Roman");
-  doc.text(req.body.name, 145, 110);
-  //END
-  // DOB
-  doc.font("Times-Bold");
-  doc.text("Date of birth:", 50, 130, {
-    underline: true,
-  });
-  doc.font("Times-Roman");
-  doc.text(req.body.dob, 145, 130);
-  //END DOB
+  doc.text(NewDate(), 90, 190);
+  doc.text(req.body.name, 125, 213);
+  doc.text(req.body.dob, 90, 233);
+  req.body.cough ? doc.image(__dirname + "/check.png", 82, 286, { width: 10 }) : "";
+  req.body.fever ? doc.image(__dirname + "/check.png", 82, 298, { width: 10 }) : "";
+  req.body.nosimp ? doc.image(__dirname + "/check.png", 82, 309, { width: 10 }) : "";
 
-  doc.rect(50, 160, 510, 0).stroke();
+  req.body.throat ? doc.image(__dirname + "/check.png", 82, 355, { width: 10 }) : "";
+  req.body.headache ? doc.image(__dirname + "/check.png", 82, 367, { width: 10 }) : "";
+  req.body.nose ? doc.image(__dirname + "/check.png", 82, 378, { width: 10 }) : "";
+  req.body.breath ? doc.image(__dirname + "/check.png", 82, 389, { width: 10 }) : "";
+  req.body.nosimp2 ? doc.image(__dirname + "/check.png", 82, 400, { width: 10 }) : "";
 
-  doc.font("Times-Bold");
-  doc.text("Symptoms", 50, 190, {
-    underline: true,
-  });
+  
+  req.body.waitingresults ? doc.image(__dirname + "/check.png", 82, 457, { width: 10 }) : "";
+  req.body.testedpositive ? doc.image(__dirname + "/check.png", 82, 469, { width: 10 }) : "";
+  req.body.hadcontact ? doc.image(__dirname + "/check.png", 82, 480, { width: 10 }) : "";
+  req.body.travelled ? doc.image(__dirname + "/check.png", 82, 491, { width: 10 }) : "";
+  req.body.requirements ? doc.image(__dirname + "/check.png", 82, 502, { width: 10 }) : "";
 
-  doc.font("Times-Roman");
-  doc.text("New or worsening cough:", 50, 210);
-  doc.text(`${req.body.cough ? "Yes" : "No"}`, 185, 210);
+  doc.addPage();
+  doc.image(__dirname + "/covid-risk-2.jpg", 10, 10, { width: 600 });
 
-  doc.text("Fever > 38 C, chills, sweats):", 50, 230);
-  doc.text(`${req.body.fever ? "Yes" : "No"}`, 185, 230);
-
-  doc.text("Sore or hoarse throat:", 50, 250);
-  doc.text(`${req.body.throat ? "Yes" : "No"}`, 185, 250);
-
-  doc.text("Headache:", 50, 270);
-  doc.text(`${req.body.headache ? "Yes" : "No"}`, 185, 270);
-
-  doc.text("Nasal Congestion:", 50, 290);
-  doc.text(`${req.body.nose ? "Yes" : "No"}`, 185, 290);
-
-  doc.text("Sneezing:", 50, 310);
-  doc.text(`${req.body.sneeze ? "Yes" : "No"}`, 185, 310);
-
-  doc.text("Loss of smell or taste:", 50, 330);
-  doc.text(`${req.body.smellTaste ? "Yes" : "No"}`, 185, 330);
-
-  doc.text("Shortness of breath:", 50, 350);
-  doc.text(`${req.body.breath ? "Yes" : "No"}`, 185, 350);
-
-  doc.text("Muscle aches:", 50, 370);
-  doc.text(`${req.body.aches ? "Yes" : "No"}`, 185, 370);
-
-  doc.text("Unusual fatigue:", 50, 390);
-  doc.text(`${req.body.fatique ? "Yes" : "No"}`, 185, 390);
-
-  doc.text("Lesions on feet, toes,fingers:", 50, 410);
-  doc.text(`${req.body.lesions ? "Yes" : "No"}`, 185, 410);
-
-  doc.text("Diarrhea:", 50, 430);
-  doc.text(`${req.body.lesions ? "Yes" : "No"}`, 185, 430);
-
-  doc.rect(50, 460, 510, 0).stroke();
-
-  doc.text(
-    "Have you travelled outside of Maritime Canada in the last 14 days (outside of NB, NS, PEI):",
-    50,
-    490
-  );
-  doc.text(req.body.day14Travel, 460, 490);
-
-  doc.text("Have you had close contact with Covid-19:", 50, 510);
-  doc.text(req.body.closeContact, 460, 510);
-
-  doc.text(
-    "Do you live within a known cluster as identified on the COVID-19 Hub:",
-    50,
-    530
-  );
-  doc.text(req.body.clusterHub, 460, 530);
-
-  doc.text("Have you been tested for COVID-19:", 50, 550);
-  doc.text(req.body.tested, 460, 550);
-
-  doc.text("Date of test:", 50, 570);
-  doc.text(
-    `${req.body.dateOfSwab === "" ? "NA" : req.body.dateOfSwab}`,
-    460,
-    570
-  );
-
-  doc.image(req.body.trimmedSignature, 50, 600, { width: 150 });
+  doc.image(req.body.trimmedSignature, 130, 120, { width: 100 });
+  doc.text(NewDate(), 400, 150);
 
   doc.end();
 
@@ -135,7 +86,7 @@ router.post("/covid", (req, res) => {
   try {
     const mailOptions = {
       from: "sean@suhbae.com",
-      to: "sean@suhbae.com",
+      to: "info@landingsurgery.ca",
       subject: `Covid-19 Assessment - ${req.body.name}`,
       html: req.body.date,
       html: req.body.name,

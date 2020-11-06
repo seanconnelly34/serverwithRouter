@@ -13,7 +13,7 @@ const Section1 = (props) => {
             fontSize: 22,
           }}
         >
-          Do you currently have two of the following symptoms:
+          In the past 48 hours have you had, or are you currently experiencing:
         </p>
         <Grid item xs={12} sm={12} className="checkBoxes">
           <FormControlLabel
@@ -45,6 +45,39 @@ const Section1 = (props) => {
             labelPlacement="end"
           />
         </Grid>
+
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.nosimp}
+            control={
+              <Checkbox
+                checked={props.state.nosimp}
+                color="primary"
+                onChange={props.onCheck}
+                name="nosimp"
+              />
+            }
+            label="Patient does not have a worsening cough or fever greater than 38 C."
+            labelPlacement="end"
+          />
+        </Grid>
+
+        <p
+          style={{
+            marginTop: 0,
+            marginBottom: 20,
+            fontStyle: "italic",
+            fontSize: 22,
+            marginTop:30,
+            
+          }}
+        >
+          OR <br/><br/>
+          Have you had two or more of the following symptoms (new or worsening):
+        </p>
+
+       
+
         <Grid item xs={12} sm={12} className="checkBoxes">
           <FormControlLabel
             value={props.state.throat}
@@ -56,7 +89,7 @@ const Section1 = (props) => {
                 name="throat"
               />
             }
-            label="Sore or hoarse throat"
+            label="Sore throat"
             labelPlacement="end"
           />
         </Grid>
@@ -86,11 +119,11 @@ const Section1 = (props) => {
                 name="nose"
               />
             }
-            label="Nasal congestion/runny nose"
+            label="Runny nose"
             labelPlacement="end"
           />
         </Grid>
-        <Grid item xs={12} sm={12} className="checkBoxes">
+        {/* <Grid item xs={12} sm={12} className="checkBoxes">
           <FormControlLabel
             value={props.state.sneeze}
             control={
@@ -104,8 +137,138 @@ const Section1 = (props) => {
             label="Sneezing"
             labelPlacement="end"
           />
+        </Grid> */}
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.breath}
+            control={
+              <Checkbox
+                checked={props.state.breath}
+                color="primary"
+                onChange={props.onCheck}
+                name="breath"
+              />
+            }
+            label="Shortness of breath"
+            labelPlacement="end"
+          />
         </Grid>
         <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.nosimp2}
+            control={
+              <Checkbox
+                checked={props.state.nosimp2}
+                color="primary"
+                onChange={props.onCheck}
+                name="nosimp2"
+              />
+            }
+            label="Patient does not have a sore throat, headache, runny nose or shortness of breath"
+            labelPlacement="end"
+          />
+        </Grid>
+
+        <p
+          style={{
+            marginTop: 0,
+            marginBottom: 20,
+            fontStyle: "italic",
+            fontSize: 22,
+            marginTop:"30px"
+          }}
+        >
+          If you meet the above screening criteria, please call 811 to arrange
+          Covid-19 testing and also notify our office.
+        </p>
+        <p
+          style={{
+            marginTop: 0,
+            marginBottom: 20,
+            fontStyle: "italic",
+            fontSize: 22,
+          }}
+        >
+          If you are under self-isolation requirements:
+        </p>
+
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.waitingresults}
+            control={
+              <Checkbox
+                checked={props.state.waitingresults}
+                color="primary"
+                onChange={props.onCheck}
+                name="waitingresults"
+              />
+            }
+            label="Are you waiting for Covid-19 test results?"
+            labelPlacement="end"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.testedpositive}
+            control={
+              <Checkbox
+                checked={props.state.testedpositive}
+                color="primary"
+                onChange={props.onCheck}
+                name="testedpositive"
+              />
+            }
+            label="Have you tested positive for Covid-19?"
+            labelPlacement="end"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.hadcontact}
+            control={
+              <Checkbox
+                checked={props.state.hadcontact}
+                color="primary"
+                onChange={props.onCheck}
+                name="hadcontact"
+              />
+            }
+            label="Have you had close contact with someone who has or is suspected to have Covid-19?"
+            labelPlacement="end"
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.travelled}
+            control={
+              <Checkbox
+                checked={props.state.travelled}
+                color="primary"
+                onChange={props.onCheck}
+                name="travelled"
+              />
+            }
+            label="Have you travelled outside of Atlantic Canada within the last 14 days?"
+            labelPlacement="end"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} className="checkBoxes">
+          <FormControlLabel
+            value={props.state.requirements}
+            control={
+              <Checkbox
+                checked={props.state.requirements}
+                color="primary"
+                onChange={props.onCheck}
+                name="requirements"
+              />
+            }
+            label="Patient is not under self-isolation requirements"
+            labelPlacement="end"
+          />
+        </Grid>
+        {/* <Grid item xs={12} sm={12} className="checkBoxes">
           <FormControlLabel
             value={props.state.smellTaste}
             control={
@@ -194,7 +357,7 @@ const Section1 = (props) => {
             label="Diarrhea"
             labelPlacement="end"
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Grid>
   );
